@@ -1,0 +1,24 @@
+{
+  "name": "playcover-cli",
+  "version": "1.0.0",
+  "description": "CLI version of PlayCover Community Edition.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"build": "npm run build"
+  },
+  "files": [
+		"index.js",
+		"PlayCoverCLI"
+	],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseMoreville/PlayCover-CLI.git"
+  },
+  "author": "JoseMoreville",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoseMoreville/PlayCover-CLI/issues"
+  },
+  "homepage": "https://github.com/JoseMoreville/PlayCover-CLI#readme"
+}
