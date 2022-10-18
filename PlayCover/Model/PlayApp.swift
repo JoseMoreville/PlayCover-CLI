@@ -8,6 +8,15 @@ import Foundation
 import IOKit.pwr_mgt
 
 class PlayApp: BaseApp {
+    private static let library = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library")
+    lazy var appStorageLocations: [URL] = [
+        PlayApp.library.appendingPathComponent("Application Scripts").appendingPathComponent(info.bundleIdentifier),
+        PlayApp.library.appendingPathComponent("Caches").appendingPathComponent(info.bundleIdentifier),
+        PlayApp.library.appendingPathComponent("HTTPStorages").appendingPathComponent(info.bundleIdentifier),
+        PlayApp.library.appendingPathComponent("Saved Application State")
+            .appendingPathComponent(info.bundleIdentifier).appendingPathExtension(".savedState")
+     ]
+
     var searchText: String {
         info.displayName.lowercased().appending(" ").appending(info.bundleName).lowercased()
     }
