@@ -19,8 +19,6 @@ class PlayApp: BaseApp {
                 throw PlayCoverError.appProhibited
             }
 
-            AppsVM.shared.updatingApps = true
-            AppsVM.shared.fetchApps()
             settings.sync()
             if try !Entitlements.areEntitlementsValid(app: self) {
                 sign()
@@ -35,9 +33,7 @@ class PlayApp: BaseApp {
             } else {
                 runAppExec() // Splitting to reduce complexity
             }
-            AppsVM.shared.updatingApps = false
         } catch {
-            AppsVM.shared.updatingApps = false
             Log.shared.error(error)
         }
     }
@@ -82,34 +78,6 @@ class PlayApp: BaseApp {
             })
     }
 
-    var icon: NSImage? {
-        var highestRes: NSImage?
-        let appDirectoryURL = PlayTools.playCoverContainer
-            .appendingPathComponent(info.executableName)
-            .appendingPathExtension("app")
-        let appDirectoryPath = "\(appDirectoryURL.relativePath)/"
-
-        if let assetsExtractor = try? AssetsExtractor(appUrl: appDirectoryURL) {
-            for icon in assetsExtractor.extractIcons() {
-                highestRes = largerImage(image: icon, compareTo: highestRes)
-            }
-        }
-
-        guard let items = try? FileManager.default.contentsOfDirectory(atPath: appDirectoryPath) else {
-            return highestRes
-        }
-        for item in items where item.hasPrefix(info.primaryIconName) {
-            do {
-                if let image = NSImage(data: try Data(contentsOf: URL(fileURLWithPath: "\(appDirectoryPath)\(item)"))) {
-                    highestRes = largerImage(image: image, compareTo: highestRes)
-                }
-            } catch {
-                Log.shared.error(error)
-            }
-        }
-        return highestRes
-    }
-
     var name: String {
         if info.displayName.isEmpty {
             return info.bundleName
@@ -120,7 +88,6 @@ class PlayApp: BaseApp {
 
     lazy var settings = AppSettings(info, container: container)
 
-    lazy var keymapping = Keymapping(info, container: container)
 
     var container: AppContainer?
 
@@ -139,7 +106,6 @@ class PlayApp: BaseApp {
     func deleteApp() {
         do {
             try FileManager.default.delete(at: URL(fileURLWithPath: url.path))
-            AppsVM.shared.fetchApps()
         } catch {
             Log.shared.error(error)
         }

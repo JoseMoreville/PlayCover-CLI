@@ -2,7 +2,6 @@
 //  InstallSteps.swift
 //  PlayCover
 //
-
 import Foundation
 
 enum InstallStepsNative: String {

@@ -35,7 +35,7 @@ class PlayTools {
                                                         withIntermediateDirectories: true,
                                                         attributes: [:])
             } catch {
-                Log.shared.error(error)
+                //Log.shared.error(error)
             }
         }
 
@@ -45,7 +45,7 @@ class PlayTools {
     static func installOnSystem() {
         DispatchQueue.global(qos: .background).async {
             do {
-                Log.shared.log("Installing PlayTools")
+                //Log.shared.log("Installing PlayTools")
 
                 // Check if Frameworks folder exists, if not, create it
                 if !FileManager.default.fileExists(atPath: frameworksURL.path) {
@@ -61,16 +61,16 @@ class PlayTools {
                 }
 
                 // Install version of PlayTools bundled with PlayCover
-                Log.shared.log("Copying PlayTools to Frameworks")
+                //Log.shared.log("Copying PlayTools to Frameworks")
                 try shell.sh("cp -r \(bundledPlayToolsFramework.esc) \(playToolsFramwework.esc)")
             } catch {
-                Log.shared.error(error)
+
             }
         }
     }
 
     static func replaceLibraries(atURL url: URL) throws {
-        Log.shared.log("Replacing libswiftUIKit.dylib")
+        //Log.shared.log("Replacing libswiftUIKit.dylib")
         try shell.shello(
             install_name_tool.path,
             "-change", "@rpath/libswiftUIKit.dylib", "/System/iOSSupport/usr/lib/swift/libswiftUIKit.dylib",
@@ -148,13 +148,13 @@ class PlayTools {
                 try bundleTarget.fixExecutable()
                 Shell.codesign(bundleTarget)
             } catch {
-                Log.shared.error(error)
+                //Log.shared.error(error)
             }
         }
     }
 
     static func convertMacho(_ macho: URL) throws {
-        Log.shared.log("Converting \(macho.lastPathComponent) binary")
+        //Log.shared.log("Converting \(macho.lastPathComponent) binary")
         try shell.shello(
             vtool.path,
             "-set-build-version", "maccatalyst", "11.0", "14.0",
@@ -185,7 +185,7 @@ class PlayTools {
         return output.contains("MACCATALYST")
     }
 
-	static func fetchEntitlements(_ exec: URL) throws -> String {
+    static func fetchEntitlements(_ exec: URL) throws -> String {
         do {
             return  try shell.sh("codesign --display --entitlements - --xml '\(exec.path)'" +
                             " | xmllint --format -", pipeStdErr: false)
@@ -197,7 +197,7 @@ class PlayTools {
                 throw error
             }
         }
-	}
+    }
 
     private static func binPath(_ bin: String) throws -> URL {
         URL(fileURLWithPath: try shell.sh("which \(bin)").trimmingCharacters(in: .newlines))
