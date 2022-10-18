@@ -35,7 +35,7 @@ class PlayTools {
                                                         withIntermediateDirectories: true,
                                                         attributes: [:])
             } catch {
-                //Log.shared.error(error)
+                Log.shared.error(error)
             }
         }
 
@@ -45,7 +45,7 @@ class PlayTools {
     static func installOnSystem() {
         DispatchQueue.global(qos: .background).async {
             do {
-                //Log.shared.log("Installing PlayTools")
+                Log.shared.log("Installing PlayTools")
 
                 // Check if Frameworks folder exists, if not, create it
                 if !FileManager.default.fileExists(atPath: frameworksURL.path) {
@@ -61,16 +61,19 @@ class PlayTools {
                 }
 
                 // Install version of PlayTools bundled with PlayCover
-                //Log.shared.log("Copying PlayTools to Frameworks")
-                try shell.sh("cp -r \(bundledPlayToolsFramework.esc) \(playToolsFramwework.esc)")
+                Log.shared.log("Copying PlayTools to Frameworks")
+                if FileManager.default.fileExists(atPath: playToolsFramwework.path) {
+                    try FileManager.default.removeItem(at: playToolsFramwework)
+                }
+                try FileManager.default.copyItem(at: bundledPlayToolsFramework, to: playToolsFramwework)
             } catch {
-
+                Log.shared.error(error)
             }
         }
     }
 
     static func replaceLibraries(atURL url: URL) throws {
-        //Log.shared.log("Replacing libswiftUIKit.dylib")
+        Log.shared.log("Replacing libswiftUIKit.dylib")
         try shell.shello(
             install_name_tool.path,
             "-change", "@rpath/libswiftUIKit.dylib", "/System/iOSSupport/usr/lib/swift/libswiftUIKit.dylib",

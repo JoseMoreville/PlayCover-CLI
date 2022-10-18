@@ -13,7 +13,6 @@
 		2840190A28FE45AB003D68EF /* Installer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ECD8A2274E75CD00DB7AC6 /* Installer.swift */; };
 		2840190B28FE45BA003D68EF /* operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 925621FF27491E4700728698 /* operations.m */; };
 		2840190C28FE45BA003D68EF /* headers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256220027491E4700728698 /* headers.m */; };
-		2840190D28FE45BA003D68EF /* patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256220527491E8200728698 /* patch.m */; };
 		2840190E28FE45BA003D68EF /* NSData+Reading.m in Sources */ = {isa = PBXBuildFile; fileRef = 925621FD27491E4700728698 /* NSData+Reading.m */; };
 		2840190F28FE45C4003D68EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92562208274921E500728698 /* main.m */; };
 		2840191028FE45D7003D68EF /* Entitlements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE06DD274EC09F002C907B /* Entitlements.swift */; };
@@ -37,6 +36,7 @@
 		2840192428FE4788003D68EF /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286D295273A7E4200958DD3 /* AppSettings.swift */; };
 		2840192528FE4790003D68EF /* UserIntentFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F4D29D26C43C040020167C /* UserIntentFlow.swift */; };
 		2840192628FE479B003D68EF /* PlayCoverError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9DAF226C1849D0071959E /* PlayCoverError.swift */; };
+		28E3011128FE587800FBDD2B /* patch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256220527491E8200728698 /* patch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -375,6 +375,7 @@
 			files = (
 				2840192428FE4788003D68EF /* AppSettings.swift in Sources */,
 				2840190C28FE45BA003D68EF /* headers.m in Sources */,
+				28E3011128FE587800FBDD2B /* patch.m in Sources */,
 				2840191028FE45D7003D68EF /* Entitlements.swift in Sources */,
 				2840191328FE4610003D68EF /* Log.swift in Sources */,
 				2840191728FE4699003D68EF /* PlayTools.swift in Sources */,
@@ -394,7 +395,6 @@
 				2840190E28FE45BA003D68EF /* NSData+Reading.m in Sources */,
 				2840191C28FE4699003D68EF /* FileExtensions.swift in Sources */,
 				2840191E28FE4788003D68EF /* ITunesResponse.swift in Sources */,
-				2840190D28FE45BA003D68EF /* patch.m in Sources */,
 				2840192028FE4788003D68EF /* AppContainer.swift in Sources */,
 				2840190F28FE45C4003D68EF /* main.m in Sources */,
 				2840192328FE4788003D68EF /* AppInfo.swift in Sources */,
@@ -416,11 +416,17 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 456PDK6UBR;
 				INFOPLIST_FILE = "$(SRCROOT)/PlayCover/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joseMoreno.PlayCoverCLI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "./PlayCover/PlayCover-Bridging-Header.h";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "./PlayCover/PlayCover-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
@@ -436,11 +442,17 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 456PDK6UBR;
 				INFOPLIST_FILE = "$(SRCROOT)/PlayCover/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joseMoreno.PlayCoverCLI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "./PlayCover/PlayCover-Bridging-Header.h";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "./PlayCover/PlayCover-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks";
