@@ -1,6 +1,6 @@
 {
   "name": "playcover-cli",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "CLI version of PlayCover Community Edition.",
   "main": "index.js",
   "scripts": {
